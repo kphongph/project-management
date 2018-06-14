@@ -1,5 +1,5 @@
 import React from 'react';
-import { urlServiceEndpoint } from './config';
+import { serviceUrl } from './Config';
 
 const withDocumentQuery = (path) => WrappedComponent => {
   class WithDocumentQuery extends React.Component {
@@ -13,21 +13,18 @@ const withDocumentQuery = (path) => WrappedComponent => {
 
     componentDidMount() {
       const {body, token} = this.props;
-      console.log(body)
       if(body && token !== null) {
         this.query(body);
       }
     }
 
     componentWillReceiveProps(nextProps) {
-      console.log(nextProps)
       if(JSON.stringify(nextProps.body) !== JSON.stringify(this.props.body)) this.query(nextProps.body);
     }
 
     query(body) {
-      console.log(body)
       const { token } = this.props;
-      fetch(urlServiceEndpoint +path+ '/query', {
+      fetch(serviceUrl +path+ '/query', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
