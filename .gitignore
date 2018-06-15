@@ -1,4 +1,5 @@
 src/Config.js
+.mongodb
 # Logs
 logs
 *.log
