@@ -1,6 +1,6 @@
 import React from 'react';
 import validate from 'validate.js';
-import { urlServiceEndpoint } from './config';
+import { serviceUrl } from './Config';
 
 var savedTime;
 var setAttribute = {};
@@ -23,7 +23,7 @@ const withDocumentFetch = (path,constraints) => WrappedComponent => {
 
     componentDidMount() {
       const { docId,token } = this.props;
-      fetch(urlServiceEndpoint + path + '/data/' + docId, {
+      fetch(serviceUrl + path + '/data/' + docId, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'JWT ' + token
@@ -46,7 +46,7 @@ const withDocumentFetch = (path,constraints) => WrappedComponent => {
       }
       if(reload) {
         const {docId,token} = nextProps;
-        fetch(urlServiceEndpoint + path + '/data/' + docId, {
+        fetch(serviceUrl + path + '/data/' + docId, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'JWT ' + token
@@ -64,7 +64,7 @@ const withDocumentFetch = (path,constraints) => WrappedComponent => {
       const { token, docId } = this.props;
       this._validate(data).then(() => {
         clearTimeout(savedTime);
-        fetch(urlServiceEndpoint + path + '/data/' + docId, {
+        fetch(serviceUrl + path + '/data/' + docId, {
           method: 'post',
           headers: {
             'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ const withDocumentFetch = (path,constraints) => WrappedComponent => {
         token,
         docId
       } = this.props;
-      fetch(urlServiceEndpoint + path + '/data/' + docId, {
+      fetch(serviceUrl + path + '/data/' + docId, {
         method: 'delete',
         headers: {
           'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ const withDocumentFetch = (path,constraints) => WrappedComponent => {
         this._validate(setAttribute).then(() => {
           clearTimeout(savedTime);
           savedTime = setTimeout(() => {
-            fetch(urlServiceEndpoint + path + '/data/' + docId, {
+            fetch(serviceUrl + path + '/data/' + docId, {
                 method: 'post',
                 headers: {
                   'Content-Type': 'application/json',
@@ -171,7 +171,8 @@ const withDocumentFetch = (path,constraints) => WrappedComponent => {
     render() {
       return <WrappedComponent
         ref = "form" { ...this.props } { ...this.state }
-        onDocumentChange={ this.onDocumentChange }/>
+        onDocumentSave={this.save}
+        onDocumentChange={this.onDocumentChange}/>
     }
   }
   return WithDocumentFetch;

@@ -22,6 +22,8 @@ const withDocumentQuery = (path) => WrappedComponent => {
       if(JSON.stringify(nextProps.body) !== JSON.stringify(this.props.body)) this.query(nextProps.body);
     }
 
+    handleRefresh = () => this.query(this.props.body);
+
     query(body) {
       const { token } = this.props;
       fetch(serviceUrl +path+ '/query', {
@@ -38,7 +40,7 @@ const withDocumentQuery = (path) => WrappedComponent => {
 
     render() {
       return <WrappedComponent
-        ref = "form" { ...this.props } { ...this.state }/>
+        ref="form" { ...this.props } { ...this.state } onRefresh={this.handleRefresh}/>
     }
   }
   return WithDocumentQuery;

@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Button,Form,Icon } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import { serviceUrl, Dbs } from '../Config'
 
 import 'react-datepicker/dist/react-datepicker.css';
 
+import withDocumentFetch from '../withDocumentFetch'
+import { Dbs } from '../Config'
 
-class Register extends Component {
+
+class ProjectForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -17,59 +19,55 @@ class Register extends Component {
     }
   }
 
-  handleChangeStartDate = (date) => this.setState({startDate:date});
-
-  handleChangeEndDate = (date) => this.setState({endDate:date});
-
-  handleChangeName = (e, {value}) => this.setState({name:value});
-
-  handleSave = () => {
-    const { startDate, endDate, name } = this.state;
-    fetch(serviceUrl+'/'+Dbs.main.name+'/'+Dbs.main.collections.project+'/data', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name:name,
-        startDate:startDate,
-        endDate:endDate
-      })
-    })
-    .then(response => response.json())
-    .then(result => {
-      if(result.ok) {
-        if(this.props.onProjectCreated) this.props.onProjectCreated();
-      }
-    })
+  handleChangeStartDate = (date) => {
+    let tmp = { ...this.props.data };
+    tmp.startDate = date;
+    this.props.onDocumentChange(tmp);
   }
 
+  handleChangeEndDate = (date) => {
+    let tmp = { ...this.props.data };
+    tmp.endDate = date;
+    this.props.onDocumentChange(tmp);
+  }
+
+  handleChangeName = (e, {value}) => {
+    let tmp = { ...this.props.data };
+    tmp.name = value;
+    this.props.onDocumentChange(tmp);
+  }
+
+  handleSave = () => {
+    this.props.onDocumentSave();
+  }
+
+
   render() {
-    const { startDate, endDate, name } = this.state;
+    const { data } = this.props;
     return (
       <Form>
         <Form.Input label='ชื่อชุดโครงการ' placeholder='ชื่อชุดโครงการ' 
           onChange={this.handleChangeName}
-          value={name} />
+          value={data.name || ''} />
         <Form.Group >
           <Form.Field fluid 
             label='วันที่เปิดรับโครงการ' 
             control={DatePicker} 
-            selected={startDate}
+            selected={moment(data.startDate)}
             onChange={this.handleChangeStartDate}/>
           <Form.Field fluid 
             label='วันที่ปิดรับโครงการ' 
             control={DatePicker} 
-            selected={endDate}
+            selected={moment(data.endDate)}
             onChange={this.handleChangeEndDate}/>
         </Form.Group>
         <Form.Field control={Button} icon labelPosition='left' onClick={this.handleSave}>
-          <Icon name='add' />
-          เพิ่ม
+          <Icon name='pencil' />
+          ปรับแก้
         </Form.Field>
       </Form>
     );
   }
 }
 
-export default Register;
+export default withDocumentFetch('/'+Dbs.main.name+'/'+Dbs.main.collections.project,{})(ProjectForm);
