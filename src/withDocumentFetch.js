@@ -171,7 +171,8 @@ const withDocumentFetch = (path,constraints) => WrappedComponent => {
     render() {
       return <WrappedComponent
         ref = "form" { ...this.props } { ...this.state }
-        onDocumentSave={this.save}
+        onRemove={this.remove}
+        onSave={this.save}
         onDocumentChange={this.onDocumentChange}/>
     }
   }

@@ -19,7 +19,8 @@ const withDocumentQuery = (path) => WrappedComponent => {
     }
 
     componentWillReceiveProps(nextProps) {
-      if(JSON.stringify(nextProps.body) !== JSON.stringify(this.props.body)) this.query(nextProps.body);
+      if(JSON.stringify(nextProps.body) !== JSON.stringify(this.props.body)) 
+        this.query(nextProps.body);
     }
 
     handleRefresh = () => this.query(this.props.body);

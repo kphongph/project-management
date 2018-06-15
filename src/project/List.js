@@ -9,32 +9,33 @@ import { Table,
 from 'semantic-ui-react'
 
 import ProjectRegister from './Register';
-import ProjectForm from './ProjectForm';
 import withDocumentQuery from '../withDocumentQuery';
 
 class List extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      registerOpen:false,
-      updateFormOpen:false
+      registerOpen:false
     }
   }
 
   handleUpdate = () => {
-    this.setState({registerOpen:false,updateFormOpen:false},() => {
+    this.setState({registerOpen:false},() => {
       this.props.onRefresh();
     });
   }
   
   handleOpen = () => this.setState({registerOpen:true});
   handleClose = () => this.setState({registerOpen:false});
-  handleUpdateFormOpen = () => this.setState({updateFormOpen:true});
-  handleUpdateFormClose = () => this.setState({updateFormOpen:false});
+
+  handleUpdateForm = (event,{name}) => { 
+    if(this.props.onSelectForm) this.props.onSelectForm(name);
+  }
+
 
   render() {
     const { response } = this.props
-    const { registerOpen,updateFormOpen } = this.state
+    const { registerOpen } = this.state
 
     let formatResponse =  response.map((item) => {
       return { ...item,
@@ -61,7 +62,9 @@ class List extends Component {
             <Table.Cell>{item.startDate}</Table.Cell> 
             <Table.Cell>{item.endDate}</Table.Cell> 
             <Table.Cell>
-              <Button size='small' icon labelPosition='left' onClick={this.handleUpdateFormOpen}>
+              <Button size='small' icon 
+                labelPosition='left' name={item._id}
+                onClick={this.handleUpdateForm}>
                <Icon name='edit'/>ปรับแก้
               </Button>
              <Button size='small' primary>เสนอโครงการ</Button>

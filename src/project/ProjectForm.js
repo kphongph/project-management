@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button,Form,Icon } from 'semantic-ui-react'
+import { Button,Form,Icon,Segment } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
@@ -37,14 +37,15 @@ class ProjectForm extends Component {
     this.props.onDocumentChange(tmp);
   }
 
-  handleSave = () => {
-    this.props.onDocumentSave();
-  }
+  handleSave = () => this.props.onSave()
+
+  handleRemove = () => this.props.onRemove()
 
 
   render() {
     const { data } = this.props;
     return (
+     <Segment>
       <Form>
         <Form.Input label='ชื่อชุดโครงการ' placeholder='ชื่อชุดโครงการ' 
           onChange={this.handleChangeName}
@@ -61,11 +62,16 @@ class ProjectForm extends Component {
             selected={moment(data.endDate)}
             onChange={this.handleChangeEndDate}/>
         </Form.Group>
+        <Form.Group inline >
         <Form.Field control={Button} icon labelPosition='left' onClick={this.handleSave}>
-          <Icon name='pencil' />
-          ปรับแก้
+          <Icon name='pencil' /> ปรับแก้
         </Form.Field>
+        <Form.Field control={Button} icon labelPosition='left' onClick={this.handleRemove}>
+          <Icon name='trash' /> ลบทิ้ง
+        </Form.Field>
+        </Form.Group>
       </Form>
+     </Segment>
     );
   }
 }

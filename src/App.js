@@ -1,18 +1,36 @@
 import React, { Component } from 'react';
-import ProjectList from './project/List'
-import ProjectForm from './project/ProjectForm'
+import ProjectControl from './project/Control'
 import './App.css';
 import 'semantic-ui-css/semantic.min.css';
+import { Tab } from 'semantic-ui-react'
 
 const token = '1234';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      activeIndex:0,
+    }
+  }
+
+  handleTabChange = (e, { activeIndex }) => this.setState({ activeIndex })
+
   render() {
-    const query = {query:{}};
+    const { activeIndex } = this.state;
+    const panes = [
+      { menuItem: 'ชุดโครงการ', render: () => <ProjectControl token={token}/>},
+      { menuItem: 'Tab 2', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
+      { menuItem: 'Tab 3', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
+    ]
+
     return (
       <div className="App">
-        <ProjectList token={token} body={query}/>
-        <ProjectForm docId='e79f55b0704a11e8a8c5bf5c579b972f'/>
+        <Tab menu={{ fluid: true, vertical: true }} 
+          activeIndex={activeIndex} 
+          onTabChange={this.handleTabChange}
+          menuPosition='left' panes={panes} />
       </div>
     );
   }
