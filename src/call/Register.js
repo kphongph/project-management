@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button,Form,Icon } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import { serviceUrl, Dbs } from '../Config'
+import { serviceUrl } from '../Config'
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -25,7 +25,7 @@ class Register extends Component {
 
   handleSave = () => {
     const { startDate, endDate, name } = this.state;
-    fetch(serviceUrl+'/'+Dbs.main.name+'/'+Dbs.main.collections.project+'/data', {
+    fetch(serviceUrl+'/call/data', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',

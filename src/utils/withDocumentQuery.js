@@ -1,5 +1,5 @@
 import React from 'react';
-import { serviceUrl } from './Config';
+import { serviceUrl } from '../Config';
 
 const withDocumentQuery = (path) => WrappedComponent => {
   class WithDocumentQuery extends React.Component {

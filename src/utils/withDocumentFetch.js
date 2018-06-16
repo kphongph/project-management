@@ -1,6 +1,6 @@
 import React from 'react';
 import validate from 'validate.js';
-import { serviceUrl } from './Config';
+import { serviceUrl } from '../Config';
 
 var savedTime;
 var setAttribute = {};

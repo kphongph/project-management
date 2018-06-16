@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import ProjectControl from './project/Control'
 import './App.css';
 import 'semantic-ui-css/semantic.min.css';
 import { Tab } from 'semantic-ui-react'
+import { CallControl } from './call'
 
 const token = '1234';
 
@@ -20,7 +20,9 @@ class App extends Component {
   render() {
     const { activeIndex } = this.state;
     const panes = [
-      { menuItem: 'ชุดโครงการ', render: () => <ProjectControl token={token}/>},
+      { menuItem: 'ชุดโครงการ', render: () => (
+        <CallControl token={token}/>
+      )},
       { menuItem: 'Tab 2', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
       { menuItem: 'Tab 3', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
     ]

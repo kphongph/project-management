@@ -1,15 +1,9 @@
 import React, { Component,Fragment } from 'react';
 import moment from 'moment';
-import { Dbs } from '../Config'
-import { Table, 
-  Modal,
-  Header, 
-  Button, 
-  Icon } 
-from 'semantic-ui-react'
+import { Table, Modal, Header, Button, Icon } from 'semantic-ui-react'
 
 import ProjectRegister from './Register';
-import withDocumentQuery from '../withDocumentQuery';
+import { withDocumentQuery } from '../utils';
 
 class List extends Component {
   constructor(props) {
@@ -30,6 +24,10 @@ class List extends Component {
 
   handleUpdateForm = (event,{name}) => { 
     if(this.props.onSelectForm) this.props.onSelectForm(name);
+  }
+
+  handlePropose = (event,{name}) => {
+    if(this.props.onPropose) this.props.onPropose(name);
   }
 
 
@@ -67,7 +65,11 @@ class List extends Component {
                 onClick={this.handleUpdateForm}>
                <Icon name='edit'/>ปรับแก้
               </Button>
-             <Button size='small' primary>เสนอโครงการ</Button>
+             <Button size='small' primary
+               name={item._id}
+               onClick={this.handlePropose}>
+               เสนอโครงการ
+             </Button>
             </Table.Cell>
           </Table.Row>
         ))}
@@ -108,4 +110,4 @@ class List extends Component {
   }
 }
 
-export default withDocumentQuery('/'+Dbs.main.name+'/'+Dbs.main.collections.project)(List);
+export default withDocumentQuery('/call')(List);

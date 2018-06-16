@@ -5,8 +5,7 @@ import moment from 'moment';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-import withDocumentFetch from '../withDocumentFetch'
-import { Dbs } from '../Config'
+import { withDocumentFetch } from '../utils'
 
 
 class ProjectForm extends Component {
@@ -40,7 +39,6 @@ class ProjectForm extends Component {
   handleSave = () => this.props.onSave()
 
   handleRemove = () => this.props.onRemove()
-
 
   render() {
     const { data } = this.props;
@@ -76,4 +74,4 @@ class ProjectForm extends Component {
   }
 }
 
-export default withDocumentFetch('/'+Dbs.main.name+'/'+Dbs.main.collections.project,{})(ProjectForm);
+export default withDocumentFetch('/call',{})(ProjectForm);
