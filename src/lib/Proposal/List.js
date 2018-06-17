@@ -28,7 +28,8 @@ class List extends Component {
     let formatResponse =  response.map((item) => {
       return { ...item,
         startDate:moment(item.startDate).format('LL'),
-        endDate:moment(item.endDate).format('LL')
+        endDate:moment(item.endDate).format('LL'),
+        requestAmount:(parseFloat(item.requestAmount)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
       }
     });
     
@@ -37,8 +38,9 @@ class List extends Component {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>ชื่อโครงการ</Table.HeaderCell>
-            <Table.HeaderCell>วันที่เปิดรับโครงการ</Table.HeaderCell>
-            <Table.HeaderCell>วันที่ปิดรับโครงการ</Table.HeaderCell>
+            <Table.HeaderCell>เริ่มต้น</Table.HeaderCell>
+            <Table.HeaderCell>สิ้นสุด</Table.HeaderCell>
+            <Table.HeaderCell>งบเสนอขอ</Table.HeaderCell>
             <Table.HeaderCell/>
           </Table.Row>
         </Table.Header>
@@ -49,6 +51,7 @@ class List extends Component {
             <Table.Cell>{item.nameTh}</Table.Cell>
             <Table.Cell>{item.startDate}</Table.Cell> 
             <Table.Cell>{item.endDate}</Table.Cell> 
+            <Table.Cell>{item.requestAmount}</Table.Cell> 
             <Table.Cell>
               <Button size='small' icon 
                 labelPosition='left' name={item._id}
