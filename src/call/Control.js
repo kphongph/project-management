@@ -1,7 +1,8 @@
 import React, { Component,Fragment } from 'react';
 import { ProposalForm } from '../proposal'
 import { documentAdder } from '../utils'
-import { CallList, CallForm } from '.'
+import { CallForm } from '.'
+import { Call } from '../lib'
 
 class Control extends Component {
 
@@ -30,7 +31,7 @@ class Control extends Component {
     const { control,callId } = this.state;
     const query = {query:{}};
     let content = (
-      <CallList token={this.props.token} 
+      <Call.List token={this.props.token} 
         body={query} 
         onPropose={this.handlePropose}
         onSelectForm={this.handleSelectForm}/>

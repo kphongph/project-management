@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Table, Header, Button, Icon } from 'semantic-ui-react'
 
 // import ProjectRegister from './Register';
-import { withDocumentQuery } from '../utils';
+import { withDocumentQuery } from '..';
 
 class List extends Component {
   constructor(props) {
