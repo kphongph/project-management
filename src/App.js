@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css';
 import { Tab } from 'semantic-ui-react'
-import CallPage from './CallPage'
+import { CallPage } from './pages'
 
 const token = '1234';
 

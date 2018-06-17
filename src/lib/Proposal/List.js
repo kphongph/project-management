@@ -2,7 +2,6 @@ import React, { Component,Fragment } from 'react';
 import moment from 'moment';
 import { Table, Header, Button, Icon } from 'semantic-ui-react'
 
-// import ProjectRegister from './Register';
 import { withDocumentQuery } from '..';
 
 class List extends Component {
@@ -19,24 +18,12 @@ class List extends Component {
     });
   }
   
-  handleRegister = () => { 
-    if(this.props.onRegister) this.props.onRegister();
-    // this.({registerOpen:true});
+  handleSelectForm = (event,{name}) => { 
+    if(this.props.onSelect) this.props.onSelect(name);
   }
- //  handleClose = () => this.setState({registerOpen:false});
-
-  handleUpdateForm = (event,{name}) => { 
-    if(this.props.onSelectForm) this.props.onSelectForm(name);
-  }
-
-  handlePropose = (event,{name}) => {
-    if(this.props.onPropose) this.props.onPropose(name);
-  }
-
 
   render() {
     const { response } = this.props
-    // const { registerOpen } = this.state
 
     let formatResponse =  response.map((item) => {
       return { ...item,
@@ -59,46 +46,30 @@ class List extends Component {
         <Table.Body>
         {formatResponse.map((item,idx) => (
           <Table.Row key={idx}>
-            <Table.Cell>{item.name}</Table.Cell>
+            <Table.Cell>{item.nameTh}</Table.Cell>
             <Table.Cell>{item.startDate}</Table.Cell> 
             <Table.Cell>{item.endDate}</Table.Cell> 
             <Table.Cell>
               <Button size='small' icon 
                 labelPosition='left' name={item._id}
-                onClick={this.handleUpdateForm}>
-               <Icon name='edit'/> รายละเอียด
+                onClick={this.handleSelectForm}>
+               <Icon name='edit'/>รายละเอียด
               </Button>
-             <Button size='small' primary
-               name={item._id}
-               onClick={this.handlePropose}>
-               เสนอโครงการ
-             </Button>
             </Table.Cell>
           </Table.Row>
         ))}
         </Table.Body>
        
-        <Table.Footer fullWidth>
-         <Table.Row>
-          <Table.HeaderCell colSpan='4'>
-           <Button size='medium' primary icon 
-             onClick={this.handleRegister}
-             labelPosition='left'>
-            <Icon name='add'/> เพิ่ม
-           </Button>
-          </Table.HeaderCell>
-         </Table.Row>
-        </Table.Footer>
       </Table>
     )
 
     return (
       <Fragment>
-       <Header as='h4' attached='top' content='ชุดโครงการที่เปิดรับลงทะเบียน'/>
+       <Header as='h4' attached='top' content='โครงการที่เสนอ'/>
        {tableLayout}
       </Fragment>
     );
   }
 }
 
-export default withDocumentQuery('/call')(List);
+export default withDocumentQuery('/proposal')(List);

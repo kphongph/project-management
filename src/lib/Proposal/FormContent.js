@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Button,Form,Icon,Segment } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+
 import { documentLoader, 
-  withDocumentFetch } from '../lib';
+  withDocumentFetch } from '..';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -44,9 +45,6 @@ class FormContent extends Component {
     let tmp = { ...this.props.data };
     tmp[name] = value;
     this.props.onDocumentChange(tmp);
-  }
-
-  handleInsert = () => {
   }
 
   handleSave = () => this.props.onSave()

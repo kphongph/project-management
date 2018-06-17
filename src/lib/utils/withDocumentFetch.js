@@ -75,7 +75,7 @@ const withDocumentFetch = (path,constraints) => WrappedComponent => {
         .then(response => response.json())
         .then(data => {
           if (data.ok) {
-            if(this.props.onSaveSuccess) this.props.onSaveSuccess();
+            if(this.props.onUpdate) this.props.onUpdate();
           } else {
             if(this.props.onSaveError) this.props.onSaveError();
           }
@@ -101,7 +101,7 @@ const withDocumentFetch = (path,constraints) => WrappedComponent => {
       })
       .then(response => response.json())
       .then(data => {
-        if(this.props.onRemoved) this.props.onRemoved();
+        if(this.props.onUpdate) this.props.onUpdate();
       })
     }
 

@@ -1,7 +1,6 @@
 import React, { Component,Fragment } from 'react';
-import { ProposalForm } from './proposal'
-import { documentAdder } from './lib'
-import { Call } from './lib'
+import { CallFormPage } from '.'
+import { Call,Proposal,documentAdder } from '../lib'
 
 class CallPage extends Component {
 
@@ -46,23 +45,24 @@ class CallPage extends Component {
 
     if(control === 'form-edit') {
        content = (
-         <Call.Form docId={callId} 
-           onRemoved={this.handleCallUpdated}
-           onSaveSuccess={this.handleCallUpdated}/>
+         <CallFormPage token={this.props.token} 
+           callId={callId} onUpdate={this.handleCallUpdated}/>
        )
     }
 
     if(control === 'propose') {
        content = (
-         <ProposalForm 
+         <Proposal.Form 
            token={this.props.token}
+           onUpdate={this.handleCallUpdated}
            docId={this.state.proposeId}/>
        )
-    
     }
 
     return (
-      <Fragment>{content}</Fragment>
+      <Fragment>
+       {content}
+      </Fragment>
     );
   }
 }
