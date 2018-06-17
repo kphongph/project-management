@@ -1,6 +1,6 @@
 import React, { Component,Fragment } from 'react';
 import { ProposalForm } from '../proposal'
-import { documentAdder } from '../utils'
+import { documentAdder } from '../lib'
 import { CallForm } from '.'
 import { Call } from '../lib'
 

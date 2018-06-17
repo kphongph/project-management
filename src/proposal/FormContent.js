@@ -3,7 +3,7 @@ import { Button,Form,Icon,Segment } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { documentLoader, 
-  withDocumentFetch } from '../utils';
+  withDocumentFetch } from '../lib';
 
 import 'react-datepicker/dist/react-datepicker.css';
 

@@ -5,10 +5,9 @@ import moment from 'moment';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { withDocumentFetch } from '../utils'
+import { withDocumentFetch } from '../lib'
 
-
-class ProjectForm extends Component {
+class FormContent extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -74,4 +73,4 @@ class ProjectForm extends Component {
   }
 }
 
-export default withDocumentFetch('/call',{})(ProjectForm);
+export default withDocumentFetch('/call',{})(FormContent);
