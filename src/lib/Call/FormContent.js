@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { withDocumentFetch } from '../lib'
+import { withDocumentFetch } from '..'
 
 class FormContent extends Component {
   constructor(props) {

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import List from './List'
+import FormContent from './FormContent'
 
 function Call(props) {
   const { defaultProps = {} } = Call
@@ -11,5 +12,6 @@ function Call(props) {
 }
 
 Call.List = List;
+Call.Form = FormContent;
 
 export default Call

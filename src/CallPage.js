@@ -1,9 +1,9 @@
 import React, { Component,Fragment } from 'react';
-import { ProposalForm } from '../proposal'
-import { documentAdder } from '../lib'
-import { Call } from '../lib'
+import { ProposalForm } from './proposal'
+import { documentAdder } from './lib'
+import { Call } from './lib'
 
-class Control extends Component {
+class CallPage extends Component {
 
   constructor(props) {
     super(props)
@@ -67,4 +67,4 @@ class Control extends Component {
   }
 }
 
-export default Control;
+export default CallPage;
