@@ -159,6 +159,7 @@ const withDocumentFetch = (path,constraints) => WrappedComponent => {
           'data': merged,
           'validateError':{}
         },() => {
+          console.log(this.props);
           if(this.props.onChange) this.props.onChange(merged)
         });
 
