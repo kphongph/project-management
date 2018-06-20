@@ -35,9 +35,10 @@ class FormContent extends Component {
   handleRemove = () => this.props.onRemove()
 
   handleChange = (obj) => {
-    console.log(obj);
-    this.props.onDocumentChange(obj);
-   // this.props.onSave();
+    console.log(this.props);
+    this.props.onDocumentChange(obj,() => {
+      this.props.onSave();
+    });
   }
 
   render() {

@@ -59,7 +59,7 @@ const withDocumentFetch = (path,constraints) => WrappedComponent => {
       }
     }
 
-    save = (content) => {
+    save = () => {
       const { data } = this.state;
       const { token, docId } = this.props;
       this._validate(data).then(() => {
@@ -150,7 +150,7 @@ const withDocumentFetch = (path,constraints) => WrappedComponent => {
       });
     }
 
-    onDocumentChange = (doc) => {
+    onDocumentChange = (doc,cb) => {
       const { data } = this.state;
       var merged = { ...data,...doc };
       this._validate(merged).then(() => {
@@ -159,7 +159,7 @@ const withDocumentFetch = (path,constraints) => WrappedComponent => {
           'data': merged,
           'validateError':{}
         },() => {
-          console.log(this.props);
+          if(cb) cb();
           if(this.props.onChange) this.props.onChange(merged)
         });
 

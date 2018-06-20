@@ -1,5 +1,6 @@
 import React, { Component,Fragment } from 'react';
 import { Call,Proposal } from '../lib'
+import { Button, Segment } from 'semantic-ui-react'
 
 class CallFormPage extends Component {
 
@@ -16,7 +17,10 @@ class CallFormPage extends Component {
   }
 
   handleSelectProposal = (proposeId) => this.setState({proposeId,control:'proposal-edit'});
-  handleProposalUpdate = () => this.setState({control:'proposal-list'});
+
+  handleProposalUpdate = () => this.setState({control:'proposal-edit'});
+
+  listPage = () => this.setState({control:'proposal-list'});
 
 
   render() {
@@ -31,8 +35,16 @@ class CallFormPage extends Component {
     )
 
     if(control === 'proposal-edit') {
-      content = <Proposal.Form callId={callId} docId={proposeId} 
-        onUpdate={this.handleProposalUpdate}/>
+      content = (
+        <Segment.Group>
+          <Segment>
+          <Button onClick={this.listPage} content="Back"/>
+          </Segment>
+          <Segment>
+          <Proposal.Form callId={callId} docId={proposeId} onUpdate={this.handleProposalUpdate}/>
+          </Segment>
+        </Segment.Group>
+      )
     }
 
     return (
